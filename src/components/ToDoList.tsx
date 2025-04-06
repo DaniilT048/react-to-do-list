@@ -1,12 +1,17 @@
 import { useState } from 'react'
 
 function ToDoList(){
-    // const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState(['Work', 'Gym', 'IT'])
     const [newTask, setNewTask] = useState('')
 
     function handleNewTask(event: any):void {
         setNewTask(event.target.value)
     }
+
+    function addTask() {
+        setTasks([...tasks, newTask])
+    }
+
 
     return (
             <div>
@@ -18,11 +23,12 @@ function ToDoList(){
                     value={newTask}
                     onChange={handleNewTask}
                     />
-                <button>add</button>
-                <button>delete</button>
+                <button onClick={addTask} >add</button>
             </div>
             <ol>
-
+                {tasks.map((element, index) => (
+                    <li key={index}>{element}</li>
+                ))}
             </ol>
         </div>
     )
