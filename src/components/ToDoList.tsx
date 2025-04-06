@@ -20,7 +20,7 @@ function ToDoList(){
     }
 
     function doneTask(index:number):void {
-        setTasks((prevTasks)=>
+        setTasks((prevTasks):{text: string, done: boolean}[]=>
             prevTasks.map((todo, i)=> i === index?{...todo, done: !todo.done}:todo))
     }
 
@@ -49,8 +49,8 @@ function ToDoList(){
                     <li key={index}>
                         <span className={element.done ? 'done' : ''}
                               style={{ textDecoration: element.done ? 'line-through' : 'none' }}>{element.text}</span>
-                        <button className={'deleteButton'} onClick={() => deleteTask(index)}>delete</button>
                         <button className={'doneButton'} onClick={() => doneTask(index)}>done</button>
+                        <button className={'deleteButton'} onClick={() => deleteTask(index)}>delete</button>
                     </li>
                 ))}
             </ol>
