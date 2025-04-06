@@ -1,15 +1,23 @@
 import { useState } from 'react'
 
 function ToDoList(){
-    const [tasks, setTasks] = useState(['Work', 'Gym', 'IT'])
+    const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState('')
 
     function handleNewTask(event: any):void {
         setNewTask(event.target.value)
     }
 
-    function addTask() {
+    function addTask():void {
+        if (newTask === '') {
+            return
+        }
         setTasks([...tasks, newTask])
+    }
+
+    function deleteTask(index: number):void {
+        const updateTasks = tasks.filter((_,  i:number):boolean => i !== index)
+        setTasks(updateTasks);
     }
 
 
@@ -26,8 +34,8 @@ function ToDoList(){
                 <button onClick={addTask} >add</button>
             </div>
             <ol>
-                {tasks.map((element, index) => (
-                    <li key={index}>{element}</li>
+                {tasks.map((element:string, index:number) => (
+                    <li key={index}><span>{element}</span> <button onClick={() => deleteTask(index)}>delete</button></li>
                 ))}
             </ol>
         </div>
