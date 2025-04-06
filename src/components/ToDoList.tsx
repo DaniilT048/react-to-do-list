@@ -3,19 +3,28 @@ import './ToDoList.css';
 
 
 function ToDoList(){
-    const [tasks, setTasks] = useState(['Work', 'IT', 'Gym'])
+    const [tasks, setTasks] = useState<{ text: string; done: boolean }[]>([]);
     const [newTask, setNewTask] = useState('')
 
     function handleNewTask(event: any):void {
         setNewTask(event.target.value)
     }
 
+
+    
     function addTask():void {
         if (newTask === '') {
             return
         }
-        setTasks([...tasks, newTask])
+        setTasks([...tasks, {text: newTask, done: false}])
     }
+
+    function doneTask(index:number):void {
+        setTasks((prevTasks)=>
+            prevTasks.map((todo, i)=> i === index?{...todo, done: !todo.done}:todo))
+    }
+
+    
 
     function deleteTask(index: number):void {
         const updateTasks = tasks.filter((_,  i:number):boolean => i !== index)
@@ -36,8 +45,13 @@ function ToDoList(){
                 <button className={'addButton'} onClick={addTask} >add</button>
             </div>
             <ol>
-                {tasks.map((element:string, index:number) => (
-                    <li key={index}><span>{element}</span> <button className={'deleteButton'} onClick={() => deleteTask(index)}>delete</button></li>
+                {tasks.map((element, index) => (
+                    <li key={index}>
+                        <span className={element.done ? 'done' : ''}
+                              style={{ textDecoration: element.done ? 'line-through' : 'none' }}>{element.text}</span>
+                        <button className={'deleteButton'} onClick={() => deleteTask(index)}>delete</button>
+                        <button className={'doneButton'} onClick={() => doneTask(index)}>done</button>
+                    </li>
                 ))}
             </ol>
         </div>

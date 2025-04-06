@@ -18,6 +18,7 @@ button{
     border-radius: 5px;
     text-transform: uppercase;
     cursor: pointer;
+    margin: 5px;
 }
 .addButton{
     background: darkgreen;
@@ -37,6 +38,14 @@ button{
     background: red;
 }
 
+.doneButton{
+    background: limegreen;
+}
+
+.doneButton:hover{
+    background: greenyellow;
+}
+
 ol{
     display: flex;
     flex-direction: column;
@@ -51,3 +60,6 @@ li{
     text-align: center;
 }
 
+.done{
+    text-decoration: line-through;
+}
