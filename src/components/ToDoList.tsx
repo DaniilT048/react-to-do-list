@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import './ToDoList.css';
+
 
 function ToDoList(){
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState(['Work', 'IT', 'Gym'])
     const [newTask, setNewTask] = useState('')
 
     function handleNewTask(event: any):void {
@@ -31,11 +33,11 @@ function ToDoList(){
                     value={newTask}
                     onChange={handleNewTask}
                     />
-                <button onClick={addTask} >add</button>
+                <button className={'addButton'} onClick={addTask} >add</button>
             </div>
             <ol>
                 {tasks.map((element:string, index:number) => (
-                    <li key={index}><span>{element}</span> <button onClick={() => deleteTask(index)}>delete</button></li>
+                    <li key={index}><span>{element}</span> <button className={'deleteButton'} onClick={() => deleteTask(index)}>delete</button></li>
                 ))}
             </ol>
         </div>
